@@ -4,21 +4,21 @@ const ReviewForm = props => {
   return(
     <div>
       <form>
-        <input type =""> </input>
-        <label htmlFor= ""> </label>
+        <label htmlFor= "name"> </label>
+        <input type ="text">Name: </input>
 
-        <input type =""> </input>
-        <label htmlFor= ""> </label>
+        <label htmlFor= "rating">Rating: </label>
+        <input type ="text"> </input>
 
-        <select name="">
-          <option value="">Star Rating</option>
-          <option value=""> </option>
-        </select>
+        // <select name="rating">
+        //   <option value="">Star Rating</option>
+        //   <option value=""> </option>
+        // </select>
 
-        <textarea name=""> </textarea>
-        <label htmlFor=""> </label>
+        <label htmlFor="content">How was your Experience?: </label>
+        <textarea name="content"> </textarea>
 
-        <input type="submit" />
+        <input type="submit" className="button" value="submit" />
       </form>
     </div>
   )
