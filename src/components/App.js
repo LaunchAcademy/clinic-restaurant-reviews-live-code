@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Restaurant from './Restaurant'
 import ReviewList from './ReviewList'
+import ReviewForm from './ReviewForm'
 
 import defaultRestaurants from '../constants/restaurants'
 import defaultReviews from '../constants/reviews'
@@ -14,6 +15,10 @@ const App = (props) => {
   const restaurantClick = (event) => {
     event.preventDefault()
     setSelectedId(event.target.id)
+  }
+
+  const addReview = (review) => {
+    setReviews([...reviews, {...review, restaurant_id:selectedId}])
   }
 
   // returns the restaurant object corresponding to the restaurant that was last selected by the user
@@ -50,10 +55,19 @@ const App = (props) => {
           {restaurantComponents}
         </div>
         <div className="reviews small-9 columns">
+        <>
           <h3>Reviews for {selectedRestaurant().name}</h3>
           <ReviewList
             reviews={relevantReviews}
           />
+        </>
+        <>
+        <h3> Leave a review for {selectedRestaurant().name} </h3>
+          <ReviewForm
+            id={selectedId}
+            addReview={addReview}
+          />
+        </>
         </div>
       </div>
     </div>
