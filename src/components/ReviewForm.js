@@ -1,24 +1,22 @@
-import React, { useState } from React
+import React, { useState } from 'React'
 
 const ReviewForm = props => {
   return(
     <div>
       <form>
-        <label htmlFor= "name"> </label>
-        <input type ="text">Name: </input>
+        <label htmlFor= "name"> Name:
+          <input type ="text" id="name"/>
+        </label>
 
-        <label htmlFor= "rating">Rating: </label>
-        <input type ="text"> </input>
+        <label htmlFor= "rating">Rating:
+          <input type ="text" id="rating"/>
+        </label>
 
-        // <select name="rating">
-        //   <option value="">Star Rating</option>
-        //   <option value=""> </option>
-        // </select>
+        <label htmlFor="content">How was your Experience?:
+          <textarea id="content"/>
+        </label>
 
-        <label htmlFor="content">How was your Experience?: </label>
-        <textarea name="content"> </textarea>
-
-        <input type="submit" className="button" value="submit" />
+        <input type="submit" className="button" value="submit"/>
       </form>
     </div>
   )
