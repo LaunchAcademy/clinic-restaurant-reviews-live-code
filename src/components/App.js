@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Restaurant from './Restaurant'
 import ReviewList from './ReviewList'
+import ReviewForm from './ReviewForm'
 
 import defaultRestaurants from '../constants/restaurants'
 import defaultReviews from '../constants/reviews'
@@ -21,6 +22,11 @@ const App = (props) => {
     return restaurants.find((restaurant) =>
       (restaurant.id === selectedId)
     )
+  }
+
+  const addReview = (review) => {
+    // debugger
+    setReviews([...reviews, {...review, restaurant_id: selectedId, id: reviews.length + 1 }])
   }
 
   let restaurantComponents = restaurants.map((restaurant) => {
@@ -53,6 +59,11 @@ const App = (props) => {
           <h3>Reviews for {selectedRestaurant().name}</h3>
           <ReviewList
             reviews={relevantReviews}
+          />
+
+          <h3>Leave a review for {selectedRestaurant().name}</h3>
+          <ReviewForm
+            addReview={addReview}
           />
         </div>
       </div>
