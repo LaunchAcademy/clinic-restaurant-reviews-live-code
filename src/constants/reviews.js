@@ -59,7 +59,7 @@ const reviews = [
     id: 9,
     restaurant_id: 'chipotle-mexican-grill-boston-5',
     name: 'Tony Khoury',
-    rating: 20,
+    rating: 1,
     content: 'I wish this place didnt exist, it ruined my whole chipotle exlerience for life. I have been doing chipotle for 6 years, about once a week. I got raw chiken, multiple peices. Almost threw up. Never again.'
   }
 ]
