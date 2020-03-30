@@ -2,15 +2,21 @@ import React from 'react'
 
 const Review = (props) => {
   return(
-    <div className="row mbl">
-      <div className="small-1 columns"><strong>Name</strong></div>
-      <div className="small-11 columns">{props.reviewData.name}</div>
+    <div className="mbl">
+      <div className="grid-x">
+        <div className="cell small-2"><strong>Name</strong></div>
+        <div className="cell auto">{props.reviewData.name}</div>
+      </div>
 
-      <div className="small-1 columns"><strong>Score</strong></div>
-      <div className="small-11 columns">{props.reviewData.rating / 100 * 5} stars</div>
+      <div className="grid-x">
+        <div className="cell small-2"><strong>Score</strong></div>
+        <div className="cell auto">{props.reviewData.rating / 100 * 5} stars</div>
+      </div>
 
-      <div className="small-1 columns"><strong>Review</strong></div>
-      <div className="small-11 columns">{props.reviewData.content}</div>
+      <div className="grid-x">
+        <div className="cell small-2"><strong>Review</strong></div>
+        <div className="cell auto">{props.reviewData.content}</div>
+      </div>
     </div>
   )
 }

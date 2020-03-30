@@ -29,7 +29,8 @@ const App = (props) => {
       isSelected = true
     }
     return (
-      <Restaurant key={restaurant.id}
+      <Restaurant
+        key={restaurant.id}
         data={restaurant}
         isSelected={isSelected}
         handleClick={restaurantClick}
@@ -43,17 +44,19 @@ const App = (props) => {
   )
 
   return(
-    <div>
-      <div className="row">
-        <div className="restaurants small-2 columns">
+    <div className="grid-container">
+      <div className="grid-x">
+        <div className="restaurants cell small-3">
           <h3>Restaurant</h3>
           {restaurantComponents}
         </div>
-        <div className="reviews small-9 columns">
+        <div className="reviews cell auto">
           <h3>Reviews for {selectedRestaurant().name}</h3>
           <ReviewList
             reviews={relevantReviews}
           />
+
+          <h3>Leave a Review for {selectedRestaurant().name}</h3>
         </div>
       </div>
     </div>
