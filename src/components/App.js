@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Restaurant from './Restaurant'
 import ReviewList from './ReviewList'
+import ReviewForm from './ReviewForm'
 
 import defaultRestaurants from '../constants/restaurants'
 import defaultReviews from '../constants/reviews'
@@ -43,6 +44,19 @@ const App = (props) => {
     (selectedId === review.restaurant_id)
   )
 
+  const addReview = (review) => {
+    // debugger
+    const newReviewId = reviews.length + 1
+
+    const newReview = {
+      ...review,
+      id: newReviewId,
+      restaurant_id: selectedId
+    }
+
+    setReviews([...reviews, newReview])
+  }
+
   return(
     <div className="grid-container">
       <div className="grid-x">
@@ -57,6 +71,9 @@ const App = (props) => {
           />
 
           <h3>Leave a Review for {selectedRestaurant().name}</h3>
+          <ReviewForm
+            addReview={addReview}
+          />
         </div>
       </div>
     </div>
