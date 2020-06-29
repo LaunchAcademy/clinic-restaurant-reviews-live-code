@@ -17,11 +17,9 @@ const App = (props) => {
   }
 
   // returns the restaurant object corresponding to the restaurant that was last selected by the user
-  const selectedRestaurant = () => {
-    return restaurants.find((restaurant) =>
-      (restaurant.id === selectedId)
-    )
-  }
+  const selectedRestaurant = restaurants.find((restaurant) =>
+    (restaurant.id === selectedId)
+  )
 
   let restaurantComponents = restaurants.map((restaurant) => {
     let isSelected = false
@@ -51,12 +49,12 @@ const App = (props) => {
           {restaurantComponents}
         </div>
         <div className="reviews cell auto">
-          <h3>Reviews for {selectedRestaurant().name}</h3>
+          <h3>Reviews for {selectedRestaurant.name}</h3>
           <ReviewList
             reviews={relevantReviews}
           />
 
-          <h3>Leave a Review for {selectedRestaurant().name}</h3>
+          <h3>Leave a Review for {selectedRestaurant.name}</h3>
         </div>
       </div>
     </div>
