@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Restaurant from './Restaurant'
 import ReviewList from './ReviewList'
+import ReviewForm from './ReviewForm'
 
 import defaultRestaurants from '../constants/restaurants'
 import defaultReviews from '../constants/reviews'
@@ -14,6 +15,19 @@ const App = (props) => {
   const restaurantClick = (event) => {
     event.preventDefault()
     setSelectedId(event.target.id)
+  }
+
+  const addReview = (review) => {
+    let id = reviews.length + 1
+    let restaurant_id = selectedId
+
+    let newReview = {
+      ...review,
+      id: id,
+      ["restaurant_id"]: restaurant_id
+    }
+
+    setReviews([...reviews, newReview])
   }
 
   // returns the restaurant object corresponding to the restaurant that was last selected by the user
@@ -55,6 +69,7 @@ const App = (props) => {
           />
 
           <h3>Leave a Review for {selectedRestaurant.name}</h3>
+          <ReviewForm addReview={addReview}/>
         </div>
       </div>
     </div>
