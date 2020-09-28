@@ -1,19 +1,59 @@
 import React, { useState } from 'react'
 
 const ReviewForm = props => {
+  const [reviewRecord, setReviewRecord] = useState({
+    name: "",
+    rating: "",
+    content: ""
+  })
+  
+  const handleChange = (event) => {
+    // debugger
+    setReviewRecord({
+      ...reviewRecord,
+      [event.currentTarget.name]: event.currentTarget.value
+    })
+  }
+
+  const handleSubmit = (event) => {
+    // debugger
+    event.preventDefault()
+    props.addReview(reviewRecord)
+    
+    setReviewRecord({
+      name: "",
+      rating: "",
+      content: ""
+    })
+  }
+  
   return(
     <div>
-      <form>
-        <label htmlFor= "name"> Name:
-          <input type ="text" name="name"/>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name"> Name:
+          <input 
+            type="text" 
+            name="name"
+            value={reviewRecord.name}
+            onChange={handleChange}
+          />
         </label>
 
         <label htmlFor= "rating">Rating:
-          <input type ="text" name="rating"/>
+          <input 
+            type="text" 
+            name="rating"
+            value={reviewRecord.rating}
+            onChange={handleChange}
+            />
         </label>
 
         <label htmlFor="content">How was your Experience?:
-          <textarea name="content"/>
+          <textarea 
+            name="content"
+            value={reviewRecord.content}
+            onChange={handleChange}
+          />
         </label>
 
         <input type="submit" className="button" value="submit"/>
