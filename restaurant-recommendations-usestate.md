@@ -1,16 +1,7 @@
 ## Introduction
 
 In this challenge, you will build a single-page app, similar to Yelp, for
-reviewing restaurants. When complete, a user can click on a restaurant and see it highlighted in blue. Selecting that restaurant also displays the associated reviews. In addition, users can submit a new review via form displayed below the reviews list.
-
-## Getting Started
-
-```no-highlight
-et get restaurant-recommendations-usestate
-cd restaurant-recommendations-usestate
-yarn install
-yarn run start
-```
+reviewing restaurants. When complete, a user can click on a restaurant and see it highlighted in blue. Selecting that restaurant also displays the associated reviews. In addition, users can submit a new review via the form displayed below the reviews list.
 
 ## Things to Know
 
@@ -38,7 +29,7 @@ for the following information:
 * Rating (one to five stars)
 * The text content of their review of the restaurant
 
-You should only be tracking user's input as they type in to the form (at first). We will persist this new review in a later step.
+You should only be tracking user's input as they type into the form (at first). We will persist this new review in a later step.
 
 #### Hints
 

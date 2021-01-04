@@ -17,9 +17,9 @@ const App = (props) => {
   }
 
   // returns the restaurant object corresponding to the restaurant that was last selected by the user
-  const selectedRestaurant = restaurants.find((restaurant) =>
-    (restaurant.id === selectedId)
-  )
+  const selectedRestaurant = restaurants.find((restaurant) => {
+    return (restaurant.id === selectedId)
+  })
 
   let restaurantComponents = restaurants.map((restaurant) => {
     let isSelected = false
@@ -36,10 +36,10 @@ const App = (props) => {
     )
   })
 
-  // of all of the reviews for all restaurants, returns only those reviews for the currently selectd restaurant
-  let relevantReviews = reviews.filter((review) =>
-    (selectedId === review.restaurant_id)
-  )
+  // of all of the reviews for all restaurants, returns only those reviews for the currently selected restaurant
+  let relevantReviews = reviews.filter((review) => {
+    return (selectedId === review.restaurant_id)
+  })
 
   return(
     <div className="grid-container">
