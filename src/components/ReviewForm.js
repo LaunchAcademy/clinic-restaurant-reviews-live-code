@@ -8,7 +8,7 @@ const ReviewForm = props => {
           <input type ="text" name="name"/>
         </label>
 
-        <label htmlFor= "rating">Rating:
+        <label htmlFor= "rating">Rating (out of 100):
           <input type ="text" name="rating"/>
         </label>
 
