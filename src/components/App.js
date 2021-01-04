@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Restaurant from './Restaurant'
 import ReviewList from './ReviewList'
+import ReviewForm from './ReviewForm'
 
 import defaultRestaurants from '../constants/restaurants'
 import defaultReviews from '../constants/reviews'
@@ -10,6 +11,35 @@ const App = (props) => {
   const [restaurants, setRestaurants] = useState(defaultRestaurants)
   const [reviews, setReviews] = useState(defaultReviews)
   const [selectedId, setSelectedId] = useState(defaultRestaurants[0].id)
+
+  // add the new review object to our `reviews` state
+  const addNewReview = (newReview) => {
+    let newReviewId = reviews.length + 1
+    let newReviewRestaurantId = selectedId
+    
+    // debugger
+    
+    let updatedReviewRecord = {
+      id: newReviewId,
+      restaurant_id: newReviewRestaurantId,
+      ...newReview
+    }
+    
+    // debugger
+    
+    setReviews([
+      ...reviews,
+      updatedReviewRecord
+    ])
+    // setReviews([
+    //   ...reviews,
+    //   {
+    //     id: newReviewId,
+    //     restaurant_id: newReviewRestaurantId,
+    //     ...newReview
+    //   }
+    // ])
+  }
 
   const restaurantClick = (event) => {
     event.preventDefault()
@@ -48,13 +78,17 @@ const App = (props) => {
           <h3>Restaurant</h3>
           {restaurantComponents}
         </div>
+        
         <div className="reviews cell auto">
+          <h3>Leave a Review for {selectedRestaurant.name}</h3>
+          <ReviewForm 
+            addNewReview={addNewReview}
+          />
+
           <h3>Reviews for {selectedRestaurant.name}</h3>
           <ReviewList
             reviews={relevantReviews}
           />
-
-          <h3>Leave a Review for {selectedRestaurant.name}</h3>
         </div>
       </div>
     </div>
