@@ -16,11 +16,6 @@ const App = (props) => {
     setSelectedId(event.target.id)
   }
 
-  // returns the restaurant object corresponding to the restaurant that was last selected by the user
-  const selectedRestaurant = restaurants.find((restaurant) => {
-    return (restaurant.id === selectedId)
-  })
-
   let restaurantComponents = restaurants.map((restaurant) => {
     let isSelected = false
     if (selectedId === restaurant.id){
@@ -35,10 +30,15 @@ const App = (props) => {
       />
     )
   })
-
+  
   // of all of the reviews for all restaurants, returns only those reviews for the currently selected restaurant
   let relevantReviews = reviews.filter((review) => {
     return (selectedId === review.restaurant_id)
+  })
+  
+  // returns the restaurant object corresponding to the restaurant that was last selected by the user
+  const selectedRestaurant = restaurants.find((restaurant) => {
+    return (restaurant.id === selectedId)
   })
 
   return(
