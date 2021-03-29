@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Restaurant from './Restaurant'
 import ReviewList from './ReviewList'
+import ReviewForm from './ReviewForm'
 
 import defaultRestaurants from '../constants/restaurants'
 import defaultReviews from '../constants/reviews'
@@ -10,6 +11,24 @@ const App = (props) => {
   const [restaurants, setRestaurants] = useState(defaultRestaurants)
   const [reviews, setReviews] = useState(defaultReviews)
   const [selectedId, setSelectedId] = useState(defaultRestaurants[0].id)
+
+  const addNewReview = (newReview) => {
+    // debugger
+    let newReviewId = reviews.length + 1
+    let restaurantId = selectedId
+
+    let updatedReviewRecord = {
+      id: newReviewId,
+      restaurant_id: restaurantId,
+      ...newReview
+    }
+
+    setReviews([
+      ...reviews,
+      updatedReviewRecord
+    ])
+    // debugger
+  }
 
   const restaurantClick = (event) => {
     event.preventDefault()
@@ -55,6 +74,7 @@ const App = (props) => {
           />
 
           <h3>Leave a Review for {selectedRestaurant.name}</h3>
+          <ReviewForm addNewReview={addNewReview} />
         </div>
       </div>
     </div>
