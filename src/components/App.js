@@ -1,15 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
-import Restaurant from './Restaurant'
-import ReviewList from './ReviewList'
+import Restaurant from "./Restaurant"
+import ReviewList from "./ReviewList"
+import ReviewForm from "./ReviewForm"
 
-import defaultRestaurants from '../constants/restaurants'
-import defaultReviews from '../constants/reviews'
+import defaultRestaurants from "../constants/restaurants"
+import defaultReviews from "../constants/reviews"
 
 const App = (props) => {
   const [restaurants, setRestaurants] = useState(defaultRestaurants)
   const [reviews, setReviews] = useState(defaultReviews)
   const [selectedId, setSelectedId] = useState(defaultRestaurants[0].id)
+
+  const addNewReview = (newReview) => {
+    let newReviewId = reviews.length + 1
+    let newReviewRestaurantId = selectedId
+
+    let updatedReviewId = {
+      id: newReviewId,
+      restaurant_id: newReviewRestaurantId,
+      ...newReview,
+    }
+
+    setReviews([...reviews, updatedReviewId])
+  }
 
   const restaurantClick = (event) => {
     event.preventDefault()
@@ -18,7 +32,7 @@ const App = (props) => {
 
   let restaurantComponents = restaurants.map((restaurant) => {
     let isSelected = false
-    if (selectedId === restaurant.id){
+    if (selectedId === restaurant.id) {
       isSelected = true
     }
     return (
@@ -30,18 +44,18 @@ const App = (props) => {
       />
     )
   })
-  
+
   // of all of the reviews for all restaurants, returns only those reviews for the currently selected restaurant
   let relevantReviews = reviews.filter((review) => {
-    return (selectedId === review.restaurant_id)
-  })
-  
-  // returns the restaurant object corresponding to the restaurant that was last selected by the user
-  const selectedRestaurant = restaurants.find((restaurant) => {
-    return (restaurant.id === selectedId)
+    return selectedId === review.restaurant_id
   })
 
-  return(
+  // returns the restaurant object corresponding to the restaurant that was last selected by the user
+  const selectedRestaurant = restaurants.find((restaurant) => {
+    return restaurant.id === selectedId
+  })
+
+  return (
     <div className="grid-container">
       <div className="grid-x">
         <div className="restaurants cell small-3">
@@ -50,11 +64,10 @@ const App = (props) => {
         </div>
         <div className="reviews cell auto">
           <h3>Reviews for {selectedRestaurant.name}</h3>
-          <ReviewList
-            reviews={relevantReviews}
-          />
+          <ReviewList reviews={relevantReviews} />
 
           <h3>Leave a Review for {selectedRestaurant.name}</h3>
+          <ReviewForm addNewReview={addNewReview} />
         </div>
       </div>
     </div>
