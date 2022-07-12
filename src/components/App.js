@@ -12,25 +12,12 @@ const App = (props) => {
   const [reviews, setReviews] = useState(defaultReviews)
   const [selectedId, setSelectedId] = useState(defaultRestaurants[0].id)
 
-  const addNewReview = (newReview) => {
-    let newReviewId = reviews.length + 1
-    let newReviewRestaurantId = selectedId
-
-    let updatedReviewId = {
-      id: newReviewId,
-      restaurant_id: newReviewRestaurantId,
-      ...newReview,
-    }
-
-    setReviews([...reviews, updatedReviewId])
-  }
-
   const restaurantClick = (event) => {
     event.preventDefault()
     setSelectedId(event.target.id)
   }
 
-  let restaurantComponents = restaurants.map((restaurant) => {
+  const restaurantComponents = restaurants.map((restaurant) => {
     let isSelected = false
     if (selectedId === restaurant.id) {
       isSelected = true
@@ -46,7 +33,7 @@ const App = (props) => {
   })
 
   // of all of the reviews for all restaurants, returns only those reviews for the currently selected restaurant
-  let relevantReviews = reviews.filter((review) => {
+  const relevantReviews = reviews.filter((review) => {
     return selectedId === review.restaurant_id
   })
 
@@ -54,6 +41,19 @@ const App = (props) => {
   const selectedRestaurant = restaurants.find((restaurant) => {
     return restaurant.id === selectedId
   })
+
+  const addNewReview = (newReviewObject) => {
+    // const newReviewId = reviews[reviews.length - 1].id + 1
+    const newReviewId = reviews.at(-1).id + 1
+
+    const updatedReview = {
+      ...newReviewObject,
+      restaurant_id: selectedId,
+      id: newReviewId
+    }
+
+    setReviews([...reviews, updatedReview])
+  }
 
   return (
     <div className="grid-container">

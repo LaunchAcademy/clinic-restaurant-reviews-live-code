@@ -1,66 +1,94 @@
 import React, { useState } from "react"
+import _ from "lodash"
+
+import ErrorList from "./ErrorList"
 
 const ReviewForm = (props) => {
-  const [reviewRecord, setReviewRecord] = useState({
+  const [newReview, setNewReview] = useState({
     name: "",
     rating: "",
-    content: "",
+    content: ""
   })
+  const [errors, setErrors] = useState({})
 
   const handleChange = (event) => {
-    setReviewRecord({
-      ...reviewRecord,
-      [event.currentTarget.name]: event.currentTarget.value,
+    setNewReview({
+      ...newReview,
+      [event.currentTarget.name]: event.currentTarget.value
     })
+  }
+
+  const validForSubmission = () => {
+    let submitErrors = {}
+    const requiredFields = ["name", "rating", "content"]
+    requiredFields.forEach((field) => {
+      if (newReview[field].trim() === "") {
+        submitErrors = {
+          ...submitErrors,
+          [field]: "is blank"
+        }
+      }
+    })
+
+    setErrors(submitErrors)
+    return _.isEmpty(submitErrors)
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    props.addNewReview(reviewRecord)
 
-    setReviewRecord({
-      name: "",
-      rating: "",
-      content: "",
-    })
+    if (validForSubmission()) {
+      props.addNewReview(newReview)
+
+      setNewReview({
+        name: "",
+        rating: "",
+        content: ""
+      })
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">
-        Name:
-        <input
-          type="text"
-          id="name"
-          name="name"
-          onChange={handleChange}
-          value={reviewRecord.name}
-        />
-      </label>
+    <div>
+      <ErrorList errors={errors} />
 
-      <label htmlFor="rating">
-        Rating:
-        <input
-          type="number"
-          id="rating"
-          name="rating"
-          onChange={handleChange}
-          value={reviewRecord.rating}
-        />
-      </label>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">
+          Name:
+          <input
+            id="name"
+            name="name"
+            type="text"
+            value={newReview.name}
+            onChange={handleChange}
+          />
+        </label>
 
-      <label htmlFor="content">
-        Content:
-        <textarea
-          id="content"
-          name="content"
-          onChange={handleChange}
-          value={reviewRecord.content}
-        />
-      </label>
+        <label htmlFor="rating">
+          Rating:
+          <input
+            id="rating"
+            name="rating"
+            type="number"
+            value={newReview.rating}
+            onChange={handleChange}
+          />
+        </label>
 
-      <input type="submit" value="Submit Review" />
-    </form>
+        <label htmlFor="content">
+          Content:
+          <input
+            id="content"
+            name="content"
+            type="text"
+            value={newReview.content}
+            onChange={handleChange}
+          />
+        </label>
+
+        <input type="submit" />
+      </form>
+    </div>
   )
 }
 
